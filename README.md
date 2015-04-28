@@ -11,3 +11,9 @@ pathogen itself, and an override for vim-airline's Zenburn theme to
 make the status bar more readable on my terrible displays.
 
 [pathogen]: https://github.com/tpope/vim-pathogen
+
+Memo to self: When installing fresh, omnisharp has some extra setup:
+
+	# install mono first
+    cd bundle/omnisharp-vim/server
+	xbuild
