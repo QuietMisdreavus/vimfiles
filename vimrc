@@ -18,6 +18,8 @@ autocmd Filetype rust setlocal expandtab
 autocmd Filetype rust setlocal foldmethod=syntax
 autocmd Filetype rust setlocal foldlevel=9
 
+let g:racer_cmd = '~/.vim/bundle/racer/target/release/racer'
+
 let g:zenburn_force_dark_Background = 1
 colorscheme zenburn
 
@@ -28,12 +30,15 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
+let g:neocomplete#enable_at_startup = 1
+
 if !exists('g:neocomplete#sources#omni#input_patterns')
 	let g:neocomplete#sources#omni#input_patterns = {}
 endif
 
 autocmd FileType cs setlocal omnifunc=OmniSharp#Complete
 let g:neocomplete#sources#omni#input_patterns.cs = '.*[^=\);]'
+let g:neocomplete#sources#omni#input_patterns.rust = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
 
 command -nargs=0 -complete=file Saveoff :mksession! session.vim | :qa
 
