@@ -8,6 +8,7 @@ set tabstop=4
 set shiftwidth=4
 set autoindent
 set cursorline
+set hidden
 
 "navigate buffers like you would tabs
 nnoremap gB :<C-U>exe ':' . v:count . 'bprevious'<CR>
