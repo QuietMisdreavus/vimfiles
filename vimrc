@@ -36,10 +36,6 @@ if !exists('g:neocomplete#sources#omni#input_patterns')
 	let g:neocomplete#sources#omni#input_patterns = {}
 endif
 
-autocmd FileType cs setlocal omnifunc=OmniSharp#Complete
-let g:neocomplete#sources#omni#input_patterns.cs = '.*[^=\);]'
-let g:neocomplete#sources#omni#input_patterns.rust = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
-
 command -nargs=0 -complete=file Saveoff :mksession! session.vim | :qa
 
 let g:airline_powerline_fonts=1

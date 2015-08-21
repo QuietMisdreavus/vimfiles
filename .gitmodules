@@ -7,9 +7,6 @@
 [submodule "bundle/rust.vim"]
 	path = bundle/rust.vim
 	url = https://github.com/rust-lang/rust.vim.git
-[submodule "bundle/omnisharp-vim"]
-	path = bundle/omnisharp-vim
-	url = https://github.com/OmniSharp/omnisharp-vim.git
 [submodule "bundle/vim-dispatch"]
 	path = bundle/vim-dispatch
 	url = https://github.com/tpope/vim-dispatch.git

@@ -12,15 +12,9 @@ make the status bar more readable on my terrible displays.
 
 [pathogen]: https://github.com/tpope/vim-pathogen
 
-Memo to self: When installing fresh, omnisharp has some extra setup:
-
-	# install mono first
-    cd bundle/omnisharp-vim/server
-	xbuild
-
-Racer also has some setup. Amazingly, I was able to build it with the
-"beta" rustc in the Arch repo (as of 4/28/2015) in contrast with the
-warning displayed in racer's README.
+Memo to self: When installing fresh, racer also has some setup. Amazingly,
+I was able to build it with the "beta" rustc in the Arch repo (as of
+4/28/2015) in contrast with the warning displayed in racer's README.
 
     # install rustc and cargo first
 	cd bundle/racer
