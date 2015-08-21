@@ -46,6 +46,11 @@ let g:airline#extensions#tabline#fnamemod = ':t'
 set laststatus=2
 set ttimeoutlen=500
 
+if filereadable($HOME . "/.vim/" . hostname() . ".vim") ||
+			\ filereadable($HOME . "/vimfiles/" . hostname() . ".vim")
+	execute "runtime " . hostname() . ".vim"
+endif
+
 if filereadable("session.vim") && filewritable("session.vim") && argc() == 0
 	source session.vim
 endif

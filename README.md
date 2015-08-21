@@ -24,3 +24,5 @@ Racer also wants a local copy of the Rust source, so clone [that repo][rust-src]
 somewhere and set `$RUST_SRC_DIR` to the `src` subdirectory there.
 Make sure to `git checkout` which branch matched your rustc, in my case
 `beta`.
+
+[rust-src]: https://github.com/rust-lang/rust
