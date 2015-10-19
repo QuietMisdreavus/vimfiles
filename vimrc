@@ -32,10 +32,6 @@ let g:syntastic_check_on_wq = 0
 
 let g:neocomplete#enable_at_startup = 1
 
-if !exists('g:neocomplete#sources#omni#input_patterns')
-	let g:neocomplete#sources#omni#input_patterns = {}
-endif
-
 command -nargs=0 -complete=file Saveoff :mksession! session.vim | :qa
 
 let g:airline_powerline_fonts=1
