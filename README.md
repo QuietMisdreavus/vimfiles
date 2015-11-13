@@ -11,18 +11,3 @@ pathogen itself, and an override for vim-airline's Zenburn theme to
 make the status bar more readable on my terrible displays.
 
 [pathogen]: https://github.com/tpope/vim-pathogen
-
-Memo to self: When installing fresh, racer also has some setup. Amazingly,
-I was able to build it with the "beta" rustc in the Arch repo (as of
-4/28/2015) in contrast with the warning displayed in racer's README.
-
-    # install rustc and cargo first
-	cd bundle/racer
-	cargo build --release
-
-Racer also wants a local copy of the Rust source, so clone [that repo][rust-src]
-somewhere and set `$RUST_SRC_DIR` to the `src` subdirectory there.
-Make sure to `git checkout` which branch matched your rustc, in my case
-`beta`.
-
-[rust-src]: https://github.com/rust-lang/rust

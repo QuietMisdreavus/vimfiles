@@ -22,8 +22,6 @@ autocmd Filetype rust setlocal expandtab
 autocmd Filetype rust setlocal foldmethod=syntax
 autocmd Filetype rust setlocal foldlevel=9
 
-let g:racer_cmd = '~/.vim/bundle/racer/target/release/racer'
-
 let g:zenburn_force_dark_Background = 1
 colorscheme zenburn
 
