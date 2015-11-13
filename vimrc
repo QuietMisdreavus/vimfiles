@@ -9,6 +9,10 @@ set shiftwidth=4
 set autoindent
 set cursorline
 set hidden
+set incsearch
+set ignorecase
+
+command TrimTrailing %s/\s\+$
 
 "navigate buffers like you would tabs
 nnoremap gB :<C-U>exe ':' . v:count . 'bprevious'<CR>
