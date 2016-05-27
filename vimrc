@@ -22,6 +22,10 @@ autocmd Filetype rust setlocal expandtab
 autocmd Filetype rust setlocal foldmethod=syntax
 autocmd Filetype rust setlocal foldlevel=9
 
+autocmd BufRead,BufNewFile *.md set filetype=markdown
+autocmd BufRead,BufNewFile *.mmd set filetype=markdown
+autocmd BufRead,BufNewFile *.mmd set expandtab
+
 let g:zenburn_force_dark_Background = 1
 colorscheme zenburn
 
