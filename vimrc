@@ -11,6 +11,7 @@ set cursorline
 set hidden
 set incsearch
 set ignorecase
+set smartcase
 
 command TrimTrailing %s/\s\+$
 
