@@ -19,11 +19,17 @@ command TrimTrailing %s/\s\+$
 nnoremap gB :<C-U>exe ':' . v:count . 'bprevious'<CR>
 nnoremap gb :<C-U>exe (v:count ? ':' . v:count . 'b' : ':bnext')<CR>
 
-autocmd Filetype rust setlocal expandtab
+augroup rust
+	autocmd!
+	autocmd Filetype rust setlocal expandtab
+augroup END
 
-autocmd BufRead,BufNewFile *.md set filetype=markdown
-autocmd BufRead,BufNewFile *.mmd set filetype=markdown
-autocmd BufRead,BufNewFile *.mmd set expandtab
+augroup markdown
+	autocmd!
+	autocmd BufRead,BufNewFile *.md set filetype=markdown
+	autocmd BufRead,BufNewFile *.mmd set filetype=markdown
+	autocmd BufRead,BufNewFile *.mmd set expandtab
+augroup END
 
 let g:zenburn_force_dark_Background = 1
 colorscheme zenburn
