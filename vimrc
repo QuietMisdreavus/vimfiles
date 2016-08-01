@@ -12,6 +12,7 @@ set hidden
 set incsearch
 set ignorecase
 set smartcase
+set showcmd
 
 command TrimTrailing %s/\s\+$
 
