@@ -1,4 +1,4 @@
-# icesoldier's vim files
+# QuietMisdreavus's vim files
 
 I wanted to stash my vim setup somewhere, so I figured I'd get off my ass and figure out how git
 works and centralize my vimrc at the same time.
