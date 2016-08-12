@@ -13,3 +13,6 @@ status bar more readable on my terrible displays.
 *Note to self:* To add a new plugin to the `bundle` directory, don't use `git clone`, use `git
 submodule add` instead. That makes sure git properly sees the new folder as a submodule instead of a
 bunch of new files.
+
+*Also:* `git submodule update --remote --merge` updates all the submodules in a repository, in one
+command, it's fantastic.
