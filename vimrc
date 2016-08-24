@@ -13,6 +13,7 @@ set incsearch
 set ignorecase
 set smartcase
 set showcmd
+set foldopen-=block
 
 command TrimTrailing %s/\s\+$
 
