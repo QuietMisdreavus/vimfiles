@@ -21,9 +21,16 @@ command TrimTrailing %s/\s\+$
 nnoremap gB :<C-U>exe ':' . v:count . 'bprevious'<CR>
 nnoremap gb :<C-U>exe (v:count ? ':' . v:count . 'b' : ':bnext')<CR>
 
+function Cargo()
+	if filereadable("Cargo.toml")
+		compiler cargo
+	endif
+endfunction
+
 augroup rust
 	autocmd!
 	autocmd Filetype rust setlocal expandtab
+	autocmd Filetype rust call Cargo()
 augroup END
 
 augroup markdown
