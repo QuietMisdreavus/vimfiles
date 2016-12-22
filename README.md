@@ -14,5 +14,7 @@ status bar more readable on my terrible displays.
 submodule add` instead. That makes sure git properly sees the new folder as a submodule instead of a
 bunch of new files.
 
+*When pulling down new submodules:* `git submodule init && git submodule update`
+
 *Also:* `git submodule update --remote --merge` updates all the submodules in a repository, in one
 command, it's fantastic.
