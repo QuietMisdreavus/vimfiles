@@ -14,6 +14,8 @@ set ignorecase
 set smartcase
 set showcmd
 set foldopen-=block
+set showmatch
+set visualbell
 
 command TrimTrailing %s/\s\+$
 
