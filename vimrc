@@ -17,6 +17,8 @@ set foldopen-=block
 set showmatch
 set visualbell
 
+set textwidth=100
+
 command TrimTrailing %s/\s\+$
 
 "navigate buffers like you would tabs
