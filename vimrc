@@ -20,6 +20,9 @@ set showmatch       " jump cursor to the opening ([{ when you type a matching }]
 set visualbell      " flash screen instead of sending BEL
 set textwidth=100   " default text-wrap width
 
+" make backspace not stupid on windows
+set backspace=indent,eol,start
+
 command TrimTrailing %s/\s\+$
 
 " navigate buffers like you would tabs
