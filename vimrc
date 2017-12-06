@@ -52,14 +52,8 @@ augroup markdown
 	autocmd BufRead,BufNewFile *.mmd set expandtab
 augroup END
 
-if has("gui_running")
-	set background=light
-	colorscheme lucius
-else
-	set background=dark
-	let g:zenburn_force_dark_Background = 1
-	colorscheme zenburn
-endif
+set background=light
+colorscheme lucius
 
 " don't save these settings in session files, so we can overwrite them with vimrc changes
 set sessionoptions-=options
