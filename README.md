@@ -13,7 +13,7 @@ everything up, so throwing all the links in there seemed like a good idea. The o
 submodule add` instead. That makes sure git properly sees the new folder as a submodule instead of a
 bunch of new files.
 
-*When pulling down new submodules:* `git submodule init && git submodule update`
+*When pulling down new submodules:* `git submodule update --init --recursive`
 
 *Also:* `git submodule update --remote --merge` updates all the submodules in a repository, in one
 command, it's fantastic.
