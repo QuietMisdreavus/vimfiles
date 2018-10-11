@@ -58,13 +58,6 @@ colorscheme lucius
 " don't save these settings in session files, so we can overwrite them with vimrc changes
 set sessionoptions-=options
 
-" syntastic settings
-" ...it's been long enough since i've set up syntastic that i don't remember what these do >_>
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-
 " airline settings
 " use powerline font symbols
 let g:airline_powerline_fonts=1
