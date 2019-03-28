@@ -75,8 +75,13 @@ set laststatus=2
 set ttimeoutlen=500
 
 " per-machine settings can go in a file named after its hostname
-if filereadable($HOME . "/.vim/" . hostname() . ".vim") ||
-			\ filereadable($HOME . "/vimfiles/" . hostname() . ".vim")
+let s:home_dir = $USERPROFILE
+if empty(s:home_dir)
+	let s:home_dir = $HOME
+endif
+
+if filereadable(s:home_dir . "/.vim/" . hostname() . ".vim") ||
+			\ filereadable(s:home_dir . "/vimfiles/" . hostname() . ".vim")
 	execute "runtime " . hostname() . ".vim"
 endif
 
