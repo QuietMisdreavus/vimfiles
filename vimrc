@@ -67,6 +67,12 @@ colorscheme lucius
 " don't save these settings in session files, so we can overwrite them with vimrc changes
 set sessionoptions-=options
 
+" detectindent settings
+" set 'shiftwidth'/'tabstop' to 4 when detectindent fails
+let g:detectindent_preferred_indent = 4
+" use the above setting when mixed indentation is detected
+let g:detectindent_preferred_when_mixed = 1
+
 " airline settings
 " use powerline font symbols
 let g:airline_powerline_fonts=1

@@ -19,3 +19,6 @@
 [submodule "bundle/sunshine-sorbet"]
 	path = bundle/sunshine-sorbet
 	url = git@github.com:QuietMisdreavus/sunshine-sorbet.git
+[submodule "bundle/detectindent"]
+	path = bundle/detectindent
+	url = https://github.com/ciaranm/detectindent.git
