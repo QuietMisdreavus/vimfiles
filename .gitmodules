@@ -22,3 +22,6 @@
 [submodule "bundle/detectindent"]
 	path = bundle/detectindent
 	url = https://github.com/ciaranm/detectindent.git
+[submodule "bundle/Windows-PowerShell-Syntax-Plugin"]
+	path = bundle/Windows-PowerShell-Syntax-Plugin
+	url = git@github.com:QuietMisdreavus/Windows-PowerShell-Syntax-Plugin.git
