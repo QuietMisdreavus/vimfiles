@@ -6,12 +6,14 @@ filetype plugin indent on
 syntax on           " syntax highlighting
 set encoding=utf-8  " default encoding for new files
 set number          " line numbers
+set expandtab       " automatically emit spaces instead of tab characters
 set tabstop=4       " tabstop/shiftwidth handle how vim handles tabs and indent
 set shiftwidth=4    " i honestly forget which does which >_>
 set autoindent      " automatically set indent on new lines based on syntax
 set cursorline      " highlight the line the cursor's in
 set hidden          " set buffers to hidden when you move to a new one
 set incsearch       " incremental search with /?
+set hlsearch        " highlight all search matches
 set ignorecase      " when typing searches in lowercase, be case-insensitive
 set smartcase       " ...but if you include uppercase, be case-sensitive
 set showcmd         " show current command in the bottom-right corner
@@ -19,11 +21,18 @@ set foldopen-=block " when navigating with {} don't open folds
 set showmatch       " jump cursor to the opening ([{ when you type a matching }])
 set visualbell      " flash screen instead of sending BEL
 set textwidth=100   " default text-wrap width
+set diffopt+=iwhite " ignore leading whitespace in diff mode
 
 " make backspace not stupid on windows
 set backspace=indent,eol,start
 
 command TrimTrailing %s/\s\+$
+
+" use <leader><space> to clear search highlights
+nnoremap <silent> <leader><space> :nohlsearch<CR>
+
+" use <leader>h to highlight the word under the cursor
+nnoremap <Leader>h :match Search /<C-R><C-W>/<CR>
 
 " navigate buffers like you would tabs
 nnoremap gB :<C-U>exe ':' . v:count . 'bprevious'<CR>
