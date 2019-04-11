@@ -41,16 +41,16 @@ nnoremap gb :<C-U>exe (v:count ? ':' . v:count . 'b' : ':bnext')<CR>
 
 " for rust files, set the compiler command for :make
 function Cargo()
-	if filereadable("Cargo.toml")
-		compiler cargo
-	endif
+    if filereadable("Cargo.toml")
+        compiler cargo
+    endif
 endfunction
 
 " for rust files, emit spaces instead of tabs
 augroup rust
-	autocmd!
-	autocmd Filetype rust setlocal expandtab
-	autocmd Filetype rust call Cargo()
+    autocmd!
+    autocmd Filetype rust setlocal expandtab
+    autocmd Filetype rust call Cargo()
     autocmd Filetype rust setlocal foldmethod syntax
     autocmd Filetype rust setlocal foldlevel 99
 augroup END
@@ -58,10 +58,10 @@ augroup END
 " .md and .mmd files are markdown
 " also, use spaces in multi-markdown files
 augroup markdown
-	autocmd!
-	autocmd BufRead,BufNewFile *.md set filetype=markdown
-	autocmd BufRead,BufNewFile *.mmd set filetype=markdown
-	autocmd BufRead,BufNewFile *.mmd set expandtab
+    autocmd!
+    autocmd BufRead,BufNewFile *.md set filetype=markdown
+    autocmd BufRead,BufNewFile *.mmd set filetype=markdown
+    autocmd BufRead,BufNewFile *.mmd set expandtab
 augroup END
 
 set background=light
@@ -95,12 +95,12 @@ set ttimeoutlen=500
 " per-machine settings can go in a file named after its hostname
 let s:home_dir = $USERPROFILE
 if empty(s:home_dir)
-	let s:home_dir = $HOME
+    let s:home_dir = $HOME
 endif
 
 if filereadable(s:home_dir . "/.vim/" . hostname() . ".vim") ||
-			\ filereadable(s:home_dir . "/vimfiles/" . hostname() . ".vim")
-	execute "runtime " . hostname() . ".vim"
+            \ filereadable(s:home_dir . "/vimfiles/" . hostname() . ".vim")
+    execute "runtime " . hostname() . ".vim"
 endif
 
 " super-janky session management
@@ -109,5 +109,5 @@ command -nargs=0 Saveoff :mksession! session.vim | :qa
 
 " ...and load the 'session.vim' file if it's there
 if filereadable("session.vim") && filewritable("session.vim") && argc() == 0
-	source session.vim
+    source session.vim
 endif
