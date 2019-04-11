@@ -22,6 +22,7 @@ set showmatch       " jump cursor to the opening ([{ when you type a matching }]
 set visualbell      " flash screen instead of sending BEL
 set textwidth=100   " default text-wrap width
 set diffopt+=iwhite " ignore leading whitespace in diff mode
+set foldcolumn=1    " display information about folds in gutter behind line numbers
 
 " make backspace not stupid on windows
 set backspace=indent,eol,start
@@ -50,6 +51,8 @@ augroup rust
 	autocmd!
 	autocmd Filetype rust setlocal expandtab
 	autocmd Filetype rust call Cargo()
+    autocmd Filetype rust setlocal foldmethod syntax
+    autocmd Filetype rust setlocal foldlevel 99
 augroup END
 
 " .md and .mmd files are markdown
