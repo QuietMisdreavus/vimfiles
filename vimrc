@@ -51,8 +51,8 @@ augroup rust
     autocmd!
     autocmd Filetype rust setlocal expandtab
     autocmd Filetype rust call Cargo()
-    autocmd Filetype rust setlocal foldmethod syntax
-    autocmd Filetype rust setlocal foldlevel 99
+    autocmd Filetype rust setlocal foldmethod=syntax
+    autocmd Filetype rust setlocal foldlevel=99
 augroup END
 
 " .md and .mmd files are markdown
