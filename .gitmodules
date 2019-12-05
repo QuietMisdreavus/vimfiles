@@ -25,3 +25,6 @@
 [submodule "bundle/Windows-PowerShell-Syntax-Plugin"]
 	path = bundle/Windows-PowerShell-Syntax-Plugin
 	url = git@github.com:QuietMisdreavus/Windows-PowerShell-Syntax-Plugin.git
+[submodule "bundle/swift.vim"]
+	path = bundle/swift.vim
+	url = https://github.com/keith/swift.vim.git
