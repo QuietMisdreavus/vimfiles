@@ -55,13 +55,18 @@ augroup rust
     autocmd Filetype rust setlocal foldlevel=99
 augroup END
 
-" .md and .mmd files are markdown
-" also, use spaces in multi-markdown files
 augroup markdown
     autocmd!
+    " .md and .mmd files are markdown
     autocmd BufRead,BufNewFile *.md set filetype=markdown
     autocmd BufRead,BufNewFile *.mmd set filetype=markdown
+
+    " use spaces in multi-markdown files
     autocmd BufRead,BufNewFile *.mmd set expandtab
+
+    " enable spell-check for markdown files
+    autocmd FileType markdown setlocal spell
+    autocmd FileType markdown setlocal spelllang=en_us
 augroup END
 
 set background=light
