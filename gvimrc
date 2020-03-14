@@ -1,5 +1,6 @@
-" i like Source Code Pro
-if has("gui_win32")
+if exists("g:misdreavus_font_override")
+    let &guifont=g:misdreavus_font_override
+elseif has("gui_win32")
 	set guifont=Source_Code_Pro:h12:cANSI
 elseif has("osx")
     set guifont=SourceCodePro-Regular:h15
