@@ -3,9 +3,10 @@
 I wanted to stash my vim setup somewhere, so I figured I'd get off my ass and figure out how git
 works and centralize my vimrc at the same time.
 
-I've set up the plugins I use as submodules under the `bundle` folder.  I use [pathogen][] to load
-everything up, so throwing all the links in there seemed like a good idea. The only thing in the
-`autoload` folder is pathogen itself.
+I've set up the plugins i use as submodules in various directories under the `pack` folder. This
+uses Vim 8.x's native package management to load them up. I was previously using [pathogen] to load
+up plugins, so it was fairly painless to migrate to native packages. There are separate package
+bundles for syntax definitions, color schemes, and plugins that offer extra functionality.
 
 [pathogen]: https://github.com/tpope/vim-pathogen
 
