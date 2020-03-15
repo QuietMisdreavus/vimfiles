@@ -1,6 +1,3 @@
-" tell pathogen to load up everything in bundle/
-execute pathogen#infect()
-
 " use filetype info, let plugins set it, use indent info from filetype data
 filetype plugin indent on
 syntax on           " syntax highlighting

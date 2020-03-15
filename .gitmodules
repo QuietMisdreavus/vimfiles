@@ -1,33 +1,33 @@
 [submodule "bundle/vim-airline"]
-	path = bundle/vim-airline
+	path = pack/plugin/start/vim-airline
 	url = https://github.com/bling/vim-airline.git
 [submodule "bundle/rust.vim"]
-	path = bundle/rust.vim
+	path = pack/syntax/start/rust.vim
 	url = https://github.com/rust-lang/rust.vim.git
 [submodule "bundle/vim-surround"]
-	path = bundle/vim-surround
+	path = pack/plugin/start/vim-surround
 	url = https://github.com/tpope/vim-surround.git
 [submodule "bundle/vim-airline-themes"]
-	path = bundle/vim-airline-themes
+	path = pack/plugin/start/vim-airline-themes
 	url = https://github.com/vim-airline/vim-airline-themes
 [submodule "bundle/vim-fugitive"]
-	path = bundle/vim-fugitive
+	path = pack/plugin/start/vim-fugitive
 	url = https://github.com/tpope/vim-fugitive.git
 [submodule "bundle/vim-lucius"]
-	path = bundle/vim-lucius
+	path = pack/color/start/vim-lucius
 	url = https://github.com/jonathanfilip/vim-lucius.git
 [submodule "bundle/sunshine-sorbet"]
-	path = bundle/sunshine-sorbet
+	path = pack/color/start/sunshine-sorbet
 	url = git@github.com:QuietMisdreavus/sunshine-sorbet.git
 [submodule "bundle/detectindent"]
-	path = bundle/detectindent
+	path = pack/plugin/start/detectindent
 	url = https://github.com/ciaranm/detectindent.git
 [submodule "bundle/Windows-PowerShell-Syntax-Plugin"]
-	path = bundle/Windows-PowerShell-Syntax-Plugin
+	path = pack/syntax/start/Windows-PowerShell-Syntax-Plugin
 	url = git@github.com:QuietMisdreavus/Windows-PowerShell-Syntax-Plugin.git
 [submodule "bundle/swift.vim"]
-	path = bundle/swift.vim
+	path = pack/syntax/start/swift.vim
 	url = https://github.com/keith/swift.vim.git
 [submodule "bundle/Zenburn"]
-	path = bundle/Zenburn
+	path = pack/color/start/Zenburn
 	url = https://github.com/jnurmine/Zenburn.git
