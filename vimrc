@@ -31,8 +31,8 @@ endif
 
 command TrimTrailing %s/\s\+$
 
-" use <leader><space> to clear search highlights
-nnoremap <silent> <leader><space> :nohlsearch<CR>
+" use <leader><space> to clear search and :match highlights
+nnoremap <silent> <leader><space> :nohlsearch<Bar>match none<CR>
 
 " use <leader>h to highlight the word under the cursor
 nnoremap <Leader>h :match Search /<C-R><C-W>/<CR>
