@@ -24,6 +24,11 @@ set foldcolumn=1    " display information about folds in gutter behind line numb
 " make backspace not stupid on windows
 set backspace=indent,eol,start
 
+" use ripgrep as :grep backend if available
+if executable('rg')
+    set grepprg=rg\ --vimgrep\ --color=never
+endif
+
 command TrimTrailing %s/\s\+$
 
 " use <leader><space> to clear search highlights
