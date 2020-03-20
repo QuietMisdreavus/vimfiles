@@ -71,9 +71,8 @@ function! MisdreavusTabsSpacesCheck()
     if !exists("b:misdreavus_tabs_spaces_mark")
         let skip = (&filetype == 'help') && !&modifiable
         let spaces_before_tabs = search('^ \+\t', 'nw') != 0
-        let tabs_before_spaces = search('^\t\+ ', 'nw') != 0
 
-        if !skip && (spaces_before_tabs || tabs_before_spaces)
+        if !skip && spaces_before_tabs
             let b:misdreavus_tabs_spaces_mark = '[t/s]'
         else
             let b:misdreavus_tabs_spaces_mark = ''
