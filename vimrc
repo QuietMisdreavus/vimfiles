@@ -214,6 +214,9 @@ nnoremap <Leader>h :match Search /<C-R><C-W>/<CR>
 nnoremap gB :<C-U>exe ':' . v:count . 'bprevious'<CR>
 nnoremap gb :<C-U>exe (v:count ? ':' . v:count . 'b' : ':bnext')<CR>
 
+" press space in visual-block mode to prepend a space to the block (and re-select it)
+xnoremap <Space> I<Space><Esc>gv
+
 " }}}
 
 " filetype-specific settings {{{
