@@ -29,6 +29,7 @@ if executable('rg')
     set grepprg=rg\ --vimgrep\ --color=never
 endif
 
+" command :TrimTrailing removes trailing whitespace in the file
 command TrimTrailing %s/\s\+$
 
 " use <leader><space> to clear search and :match highlights
