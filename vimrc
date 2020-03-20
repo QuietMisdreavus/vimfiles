@@ -7,8 +7,9 @@ syntax on           " syntax highlighting
 set encoding=utf-8    " default encoding for new files
 set number            " line numbers
 set expandtab         " automatically emit spaces instead of tab characters
-set tabstop=4         " tabstop/shiftwidth handle how vim handles tabs and indent
-set shiftwidth=4      " i honestly forget which does which >_>
+set smarttab          " tab/backspace 'shiftwidth' characters of leading indent
+set softtabstop=4     " insert 4 spaces when pressing Tab in insert mode
+set shiftwidth=4      " shift 4 spaces with << and >>
 set autoindent        " automatically set indent on new lines based on syntax
 set cursorline        " highlight the line the cursor's in
 set hidden            " set buffers to hidden when you move to a new one
