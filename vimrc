@@ -25,6 +25,10 @@ set diffopt+=iwhite   " ignore leading whitespace in diff mode
 set foldcolumn=1      " display information about folds in gutter behind line numbers
 set foldlevelstart=99 " start with all folds open
 
+" show tab complete menu and tab-complete to the longest substring
+set wildmenu
+set wildmode=list:longest
+
 " show trailing spaces, tab characters, and NBSP characters in the editor, and also mark when lines
 " extend past the screen when 'nowrap' is set
 set list
