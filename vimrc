@@ -21,6 +21,11 @@ set textwidth=100   " default text-wrap width
 set diffopt+=iwhite " ignore leading whitespace in diff mode
 set foldcolumn=1    " display information about folds in gutter behind line numbers
 
+" show trailing spaces, tab characters, and NBSP characters in the editor, and also mark when lines
+" extend past the screen when 'nowrap' is set
+set list
+set listchars=trail:~,tab:>-,nbsp:%,extends:*
+
 " make backspace not stupid on windows
 set backspace=indent,eol,start
 
