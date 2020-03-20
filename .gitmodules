@@ -1,5 +1,5 @@
 [submodule "bundle/vim-airline"]
-	path = pack/plugin/start/vim-airline
+	path = pack/plugin/opt/vim-airline
 	url = https://github.com/bling/vim-airline.git
 [submodule "bundle/rust.vim"]
 	path = pack/syntax/start/rust.vim
@@ -8,7 +8,7 @@
 	path = pack/plugin/start/vim-surround
 	url = https://github.com/tpope/vim-surround.git
 [submodule "bundle/vim-airline-themes"]
-	path = pack/plugin/start/vim-airline-themes
+	path = pack/plugin/opt/vim-airline-themes
 	url = https://github.com/vim-airline/vim-airline-themes
 [submodule "bundle/vim-fugitive"]
 	path = pack/plugin/start/vim-fugitive
