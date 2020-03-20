@@ -165,8 +165,13 @@ function! MisdreavusTabline()
             let hash = '^'
         endif
 
+        let name = bufname(b)->pathshorten()
+        if name == ''
+            let name = '[no name]'
+        endif
+
         let s .= ' ' . hash . b . ':'
-        let s .= ' ' . bufname(b)->pathshorten() . ' '
+        let s .= ' ' . name . ' '
 
         if getbufvar(b, '&mod')
             let s .= '[+] '
