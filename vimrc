@@ -54,9 +54,9 @@ set statusline+=%*                                  " reset statusline color at 
 
 " trailing whitespace check for statusline
 function! MisdreavusTrailingSpaceCheck()
-    " save tws check in a per-buffer cache to save cpu time
     if !exists("b:misdreavus_trailing_space_mark")
-        if search('\s\+$', 'nw') != 0
+        let skip = (&filetype == 'help') && !&modifiable
+        if !skip && search('\s\+$', 'nw') != 0
             let b:misdreavus_trailing_space_mark = '[tws]'
         else
             let b:misdreavus_trailing_space_mark = ''
@@ -69,10 +69,11 @@ endfunction
 " mixed indent (within the same line) check for statusline
 function! MisdreavusTabsSpacesCheck()
     if !exists("b:misdreavus_tabs_spaces_mark")
+        let skip = (&filetype == 'help') && !&modifiable
         let spaces_before_tabs = search('^ \+\t', 'nw') != 0
         let tabs_before_spaces = search('^\t\+ ', 'nw') != 0
 
-        if spaces_before_tabs || tabs_before_spaces
+        if !skip && (spaces_before_tabs || tabs_before_spaces)
             let b:misdreavus_tabs_spaces_mark = '[t/s]'
         else
             let b:misdreavus_tabs_spaces_mark = ''
@@ -85,10 +86,11 @@ endfunction
 " mixed indent (across the whole file) check for statusline
 function! MisdreavusMixedIndentCheck()
     if !exists("b:misdreavus_mixed_indent_mark")
+        let skip = (&filetype == 'help') && !&modifiable
         let tabs = search('^ \+', 'nw') != 0
         let spaces = search('^\t\+', 'nw') != 0
 
-        if tabs && spaces
+        if !skip && tabs && spaces
             let b:misdreavus_mixed_indent_mark = '[mi]'
         else
             let b:misdreavus_mixed_indent_mark = ''
