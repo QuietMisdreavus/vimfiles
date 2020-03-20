@@ -25,6 +25,8 @@ set textwidth=100     " default text-wrap width
 set diffopt+=iwhite   " ignore leading whitespace in diff mode
 set foldcolumn=1      " display information about folds in gutter behind line numbers
 set foldlevelstart=99 " start with all folds open
+set scrolloff=5       " always keep 5 lines between the cursor and the edge of the screen
+set scrolljump=5      " scroll 5 lines at a time when the cursor moves off the edge
 
 " show tab complete menu and tab-complete to the longest substring
 set wildmenu
