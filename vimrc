@@ -1,25 +1,29 @@
+" basic settings {{{
+
 " use filetype info, let plugins set it, use indent info from filetype data
 filetype plugin indent on
 syntax on           " syntax highlighting
-set encoding=utf-8  " default encoding for new files
-set number          " line numbers
-set expandtab       " automatically emit spaces instead of tab characters
-set tabstop=4       " tabstop/shiftwidth handle how vim handles tabs and indent
-set shiftwidth=4    " i honestly forget which does which >_>
-set autoindent      " automatically set indent on new lines based on syntax
-set cursorline      " highlight the line the cursor's in
-set hidden          " set buffers to hidden when you move to a new one
-set incsearch       " incremental search with /?
-set hlsearch        " highlight all search matches
-set ignorecase      " when typing searches in lowercase, be case-insensitive
-set smartcase       " ...but if you include uppercase, be case-sensitive
-set showcmd         " show current command in the bottom-right corner
-set foldopen-=block " when navigating with {} don't open folds
-set showmatch       " jump cursor to the opening ([{ when you type a matching }])
-set visualbell      " flash screen instead of sending BEL
-set textwidth=100   " default text-wrap width
-set diffopt+=iwhite " ignore leading whitespace in diff mode
-set foldcolumn=1    " display information about folds in gutter behind line numbers
+
+set encoding=utf-8    " default encoding for new files
+set number            " line numbers
+set expandtab         " automatically emit spaces instead of tab characters
+set tabstop=4         " tabstop/shiftwidth handle how vim handles tabs and indent
+set shiftwidth=4      " i honestly forget which does which >_>
+set autoindent        " automatically set indent on new lines based on syntax
+set cursorline        " highlight the line the cursor's in
+set hidden            " set buffers to hidden when you move to a new one
+set incsearch         " incremental search with /?
+set hlsearch          " highlight all search matches
+set ignorecase        " when typing searches in lowercase, be case-insensitive
+set smartcase         " ...but if you include uppercase, be case-sensitive
+set showcmd           " show current command in the bottom-right corner
+set foldopen-=block   " when navigating with {} don't open folds
+set showmatch         " jump cursor to the opening ([{ when you type a matching }])
+set visualbell        " flash screen instead of sending BEL
+set textwidth=100     " default text-wrap width
+set diffopt+=iwhite   " ignore leading whitespace in diff mode
+set foldcolumn=1      " display information about folds in gutter behind line numbers
+set foldlevelstart=99 " start with all folds open
 
 " show trailing spaces, tab characters, and NBSP characters in the editor, and also mark when lines
 " extend past the screen when 'nowrap' is set
@@ -34,7 +38,15 @@ if executable('rg')
     set grepprg=rg\ --vimgrep\ --color=never
 endif
 
-" custom status bar
+" don't save these settings in session files, so we can overwrite them with vimrc changes
+set sessionoptions-=options
+
+set background=light
+colorscheme lucius
+
+" }}}
+
+" custom status bar {{{
 set statusline=
 set statusline+=[\ %{mode('1')}\ ]                  " mode flag
 set statusline+=%#Folded#                           " color next section medium
@@ -106,6 +118,9 @@ augroup statusline
     autocmd CursorHold,BufWritePost * unlet! b:misdreavus_tabs_spaces_mark
     autocmd CursorHold,BufWritePost * unlet! b:misdreavus_mixed_indent_mark
 augroup END
+" }}}
+
+" custom commands {{{
 
 " command :TrimTrailing removes trailing whitespace in the file
 command TrimTrailing %s/\s\+$
@@ -120,6 +135,10 @@ nnoremap <Leader>h :match Search /<C-R><C-W>/<CR>
 nnoremap gB :<C-U>exe ':' . v:count . 'bprevious'<CR>
 nnoremap gb :<C-U>exe (v:count ? ':' . v:count . 'b' : ':bnext')<CR>
 
+" }}}
+
+" filetype-specific settings {{{
+
 " for rust files, set the compiler command for :make
 function Cargo()
     if filereadable("Cargo.toml")
@@ -133,7 +152,6 @@ augroup rust
     autocmd Filetype rust setlocal expandtab
     autocmd Filetype rust call Cargo()
     autocmd Filetype rust setlocal foldmethod=syntax
-    autocmd Filetype rust setlocal foldlevel=99
 augroup END
 
 augroup markdown
@@ -150,11 +168,14 @@ augroup markdown
     autocmd FileType markdown setlocal spelllang=en_us
 augroup END
 
-set background=light
-colorscheme lucius
+augroup vimscript
+    autocmd!
+    autocmd FileType vim setlocal foldmethod=marker
+augroup END
 
-" don't save these settings in session files, so we can overwrite them with vimrc changes
-set sessionoptions-=options
+" }}}
+
+" plugin-specfic settings {{{
 
 " detectindent settings
 " set 'shiftwidth'/'tabstop' to 4 when detectindent fails
@@ -178,6 +199,9 @@ set laststatus=2
 " time out commands at 0.5sec, so the mode display is a little faster
 set ttimeoutlen=500
 
+" }}}
+
+" load per-machine settings {{{
 " per-machine settings can go in a file named after its hostname
 let s:home_dir = $USERPROFILE
 if empty(s:home_dir)
@@ -188,8 +212,9 @@ if filereadable(s:home_dir . "/.vim/" . hostname() . ".vim") ||
             \ filereadable(s:home_dir . "/vimfiles/" . hostname() . ".vim")
     execute "runtime " . hostname() . ".vim"
 endif
+" }}}
 
-" super-janky session management
+" super-janky session management {{{
 " use :Saveoff to dump current session to './session.vim' and quit
 command -nargs=0 Saveoff :mksession! session.vim | :qa
 
@@ -197,3 +222,4 @@ command -nargs=0 Saveoff :mksession! session.vim | :qa
 if filereadable("session.vim") && filewritable("session.vim") && argc() == 0
     source session.vim
 endif
+" }}}
