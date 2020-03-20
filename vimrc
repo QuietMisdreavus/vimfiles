@@ -120,6 +120,73 @@ augroup statusline
 augroup END
 " }}}
 
+" custom tabline {{{
+
+" always show tabline, even when only one tab is active
+set showtabline=2
+
+function! MisdreavusTabline()
+    let s = ''
+
+    if tabpagenr('$') > 1
+        " tabs are being used, display the tab number
+        let s .= '%#TODO#'
+        let s .= ' tab #' . tabpagenr()
+        let s .= ' %999X[X]%X ' " close button
+    endif
+
+    let curbuf = bufnr()
+    let altbuf = bufnr('#')
+    let visbufs = tabpagebuflist()
+    let firstbuf = v:true
+
+    let s .= '%#TabLine#'
+
+    for b in range(1, bufnr('$'))
+        if !bufexists(b) || !buflisted(b)
+            continue
+        endif
+
+        if firstbuf
+            let firstbuf = v:false
+        else
+            let s .= '|'
+        endif
+
+        if b == curbuf
+            let s .= '%#TabLineSel#'
+        elseif index(visbufs, b) != -1
+            let s .= '%#SignColumn#'
+        endif
+
+        " number buffers, but signify the alternate buffer with ^N instead of #N
+        let hash = '#'
+        if b == altbuf
+            let hash = '^'
+        endif
+
+        let s .= ' ' . hash . b . ':'
+        let s .= ' ' . bufname(b)->pathshorten() . ' '
+
+        if getbufvar(b, '&mod')
+            let s .= '[+] '
+        endif
+
+        if b == curbuf || index(visbufs, b) != -1
+            let s .= '%#TabLine#'
+        endif
+    endfor
+
+    " color remainder light
+    let s .= '%#Folded#'
+
+    return s
+endfunction
+
+set tabline=%!MisdreavusTabline()
+
+" }}}
+
 " custom commands {{{
 
 " command :TrimTrailing removes trailing whitespace in the file
