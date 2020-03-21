@@ -29,6 +29,7 @@ set scrolloff=5       " always keep 5 lines between the cursor and the edge of t
 set scrolljump=5      " scroll 5 lines at a time when the cursor moves off the edge
 set splitbelow        " split new horizontal windows underneath the current one
 set splitright        " split new vertical windows to the right of the current one
+set path+=**          " allow `:find`, tab-completion et al to search through subdirectories
 
 " show tab complete menu and tab-complete to the longest substring
 set wildmenu
