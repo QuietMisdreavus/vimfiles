@@ -155,7 +155,9 @@ function! MisdreavusTabline()
     let s .= '%#TabLine#'
 
     for b in range(1, bufnr('$'))
-        if !bufexists(b) || !buflisted(b)
+        if !bufexists(b)
+            continue
+        elseif !buflisted(b) && (b != curbuf)
             continue
         endif
 
@@ -177,7 +179,14 @@ function! MisdreavusTabline()
             let hash = '^'
         endif
 
-        let name = bufname(b)->pathshorten()
+        if !buflisted(b)
+            " help files are not listed, but i want to be able to see my current buffer in the tab
+            " bar regardless. i don't want to print the full path tho, so just grab the filename
+            let name = bufname(b)->fnamemodify(':t')
+        else
+            let name = bufname(b)->pathshorten()
+        endif
+
         if name == ''
             let name = '[no name]'
         endif
