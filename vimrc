@@ -30,6 +30,8 @@ set scrolljump=5      " scroll 5 lines at a time when the cursor moves off the e
 set splitbelow        " split new horizontal windows underneath the current one
 set splitright        " split new vertical windows to the right of the current one
 set path+=**          " allow `:find`, tab-completion et al to search through subdirectories
+set laststatus=2      " always show status line
+set ttimeoutlen=500   " time out commands at 0.5sec, so the mode display is a little faster
 
 " show tab complete menu and tab-complete to the longest substring
 set wildmenu
@@ -279,10 +281,6 @@ let g:airline#extensions#tabline#buffer_nr_show = 1
 let g:airline#extensions#tabline#tab_nr_type = 1
 " show a condensed filename in the tabline
 let g:airline#extensions#tabline#fnamemod = ':p:~:.'
-" always show status line, so we always have airline
-set laststatus=2
-" time out commands at 0.5sec, so the mode display is a little faster
-set ttimeoutlen=500
 
 " }}}
 
