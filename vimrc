@@ -20,6 +20,7 @@ set smartcase         " ...but if you include uppercase, be case-sensitive
 set showcmd           " show current command in the bottom-right corner
 set foldopen-=block   " when navigating with {} don't open folds
 set showmatch         " jump cursor to the opening ([{ when you type a matching }])
+set matchtime=1       " ...but only for 100ms
 set visualbell        " flash screen instead of sending BEL
 set textwidth=100     " default text-wrap width
 set diffopt+=iwhite   " ignore leading whitespace in diff mode
