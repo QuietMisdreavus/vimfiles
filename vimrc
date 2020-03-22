@@ -53,6 +53,12 @@ endif
 " don't save these settings in session files, so we can overwrite them with vimrc changes
 set sessionoptions-=options
 
+" if mouse support is available, set it for normal and visual modes
+" (this will enable it for terminal vim and diable insert-mode mouse for gvim)
+if has('mouse')
+    set mouse=nv
+endif
+
 set background=light
 colorscheme lucius
 
