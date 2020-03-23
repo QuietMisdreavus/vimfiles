@@ -238,6 +238,26 @@ nnoremap gb :<C-U>exe (v:count ? ':' . v:count . 'b' : ':bnext')<CR>
 " press space in visual-block mode to prepend a space to the block (and re-select it)
 xnoremap <Space> I<Space><Esc>gvlolo
 
+" stolen from defaults.vim
+augroup loadFile
+    autocmd!
+
+    " When editing a file, always jump to the last known cursor position.
+    " Don't do it when the position is invalid, when inside an event handler
+    " (happens when dropping a file on gvim) and for a commit message (it's
+    " likely a different one than last time).
+    autocmd BufReadPost *
+        \ if line("'\"") >= 1 && line("'\"") <= line("$") && &ft !~# 'commit'
+        \ |   exe "normal! g`\""
+        \ | endif
+augroup END
+
+command DisableCursorRecall augroup loadFile | autocmd! | augroup END
+
+" also stolen from defaults.vim, this shows a diff between a buffer and the file on disk
+command DiffOrig vert new | set bt=nofile | r ++edit # | 0d_ | diffthis
+        \ | wincmd p | diffthis
+
 " }}}
 
 " filetype-specific settings {{{
