@@ -144,8 +144,63 @@ augroup END
 " always show tabline, even when only one tab is active
 set showtabline=2
 
+function! MisdreavusIncludeInLeftTabs(b)
+    return bufexists(a:b) && buflisted(a:b)
+endfunction
+
+function! MisdreavusIncludeInRightTabs(b)
+    " TODO: also include quickfix list, location list, preview window
+    let visbufs = tabpagebuflist()
+    return bufexists(a:b) && !buflisted(a:b) && (index(visbufs, a:b) != -1)
+endfunction
+
+function! MisdreavusTabSegment(b)
+    let segment = ''
+    let curbuf = bufnr()
+    let altbuf = bufnr('#')
+    let visbufs = tabpagebuflist()
+
+    if a:b == curbuf
+        let segment .= '%#TabLineSel#'
+    elseif index(visbufs, a:b) != -1
+        let segment .= '%#SignColumn#'
+    endif
+
+    " number buffers, but signify the alternate buffer with ^N instead of #N
+    let hash = '#'
+    if a:b == altbuf
+        let hash = '^'
+    endif
+
+    if !buflisted(a:b)
+        " help files are not listed, but i want to be able to see my current buffer in the tab
+        " bar regardless. i don't want to print the full path tho, so just grab the filename
+        let name = bufname(a:b)->fnamemodify(':t')
+    else
+        let name = bufname(a:b)->pathshorten()
+    endif
+
+    if name == ''
+        let name = '[no name]'
+    endif
+
+    let segment .= ' ' . hash . a:b . ':'
+    let segment .= ' ' . name . ' '
+
+    if getbufvar(a:b, '&mod')
+        let segment .= '[+] '
+    endif
+
+    if a:b == curbuf || index(visbufs, a:b) != -1
+        let segment .= '%#TabLine#'
+    endif
+
+    return segment
+endfunction
+
 function! MisdreavusTabline()
     let s = ''
+    let suf = ''
 
     if tabpagenr('$') > 1
         " tabs are being used, display the tab number
@@ -162,56 +217,34 @@ function! MisdreavusTabline()
     let s .= '%#TabLine#'
 
     for b in range(1, bufnr('$'))
-        if !bufexists(b)
-            continue
-        elseif !buflisted(b) && (b != curbuf)
-            continue
-        endif
+        if MisdreavusIncludeInLeftTabs(b)
+            if firstbuf
+                let firstbuf = v:false
+            else
+                let s .= '|'
+            endif
 
-        if firstbuf
-            let firstbuf = v:false
-        else
-            let s .= '|'
-        endif
-
-        if b == curbuf
-            let s .= '%#TabLineSel#'
-        elseif index(visbufs, b) != -1
-            let s .= '%#SignColumn#'
-        endif
-
-        " number buffers, but signify the alternate buffer with ^N instead of #N
-        let hash = '#'
-        if b == altbuf
-            let hash = '^'
-        endif
-
-        if !buflisted(b)
-            " help files are not listed, but i want to be able to see my current buffer in the tab
-            " bar regardless. i don't want to print the full path tho, so just grab the filename
-            let name = bufname(b)->fnamemodify(':t')
-        else
-            let name = bufname(b)->pathshorten()
-        endif
-
-        if name == ''
-            let name = '[no name]'
-        endif
-
-        let s .= ' ' . hash . b . ':'
-        let s .= ' ' . name . ' '
-
-        if getbufvar(b, '&mod')
-            let s .= '[+] '
-        endif
-
-        if b == curbuf || index(visbufs, b) != -1
-            let s .= '%#TabLine#'
+            let s .= MisdreavusTabSegment(b)
         endif
     endfor
 
     " color remainder light
     let s .= '%#Folded#'
+
+    let firstbuf = v:true
+
+    for b in range(1, bufnr('$'))
+        if MisdreavusIncludeInRightTabs(b)
+            if firstbuf
+                let firstbuf = v:false
+                let s .= '%='
+            else
+                let s .= '|'
+            endif
+
+            let s .= MisdreavusTabSegment(b)
+        endif
+    endfor
 
     return s
 endfunction
