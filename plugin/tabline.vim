@@ -33,10 +33,13 @@ function! MisdreavusTabSegment(b)
         let hash = '^'
     endif
 
-    if !buflisted(a:b)
+    if !buflisted(a:b) && getbufvar(a:b, '&filetype') == 'help'
         " help files are not listed, but i want to be able to see my current buffer in the tab
         " bar regardless. i don't want to print the full path tho, so just grab the filename
         let name = bufname(a:b)->fnamemodify(':t')
+    elseif getbufvar(a:b, '&filetype') == 'qf'
+        " the quickfix list doesn't have a bufname, so supply one
+        let name = '[qf]'
     else
         let name = bufname(a:b)->pathshorten()
     endif
