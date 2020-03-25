@@ -38,8 +38,8 @@ function! MisdreavusTabSegment(b)
         " bar regardless. i don't want to print the full path tho, so just grab the filename
         let name = bufname(a:b)->fnamemodify(':t')
     elseif getbufvar(a:b, '&filetype') == 'qf'
-        " the quickfix list doesn't have a bufname, so supply one
-        let name = '[qf]'
+        " the quickfix list's name isn't in the bufname, but behind this `getqflist` api
+        let name = getqflist({'qfbufnr': a:b, 'title': 0}).title
     else
         let name = bufname(a:b)->pathshorten()
     endif
