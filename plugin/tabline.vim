@@ -6,7 +6,23 @@
 set showtabline=2
 
 function! MisdreavusIncludeInLeftTabs(b)
-    return bufexists(a:b) && buflisted(a:b) && (getbufvar(a:b, '&filetype') != 'qf')
+    if !bufexists(a:b)
+        return v:false
+    endif
+
+    if !buflisted(a:b)
+        return v:false
+    endif
+
+    if getbufvar(a:b, '&filetype') == 'qf'
+        return v:false
+    endif
+
+    if bufwinnr(a:b)->getwinvar('&previewwindow', v:false)
+        return v:false
+    endif
+
+    return v:true
 endfunction
 
 function! MisdreavusIncludeInRightTabs(b)
@@ -15,8 +31,7 @@ function! MisdreavusIncludeInRightTabs(b)
     endif
 
     if buflisted(a:b)
-        " TODO: add preview window?
-        return getbufvar(a:b, '&filetype') == 'qf'
+        return getbufvar(a:b, '&filetype') == 'qf' || bufwinnr(a:b)->getwinvar('&previewwindow', v:false)
     else
         let visbufs = tabpagebuflist()
         return index(visbufs, a:b) != -1
@@ -62,7 +77,12 @@ function! MisdreavusTabSegment(b)
         let name = '[no name]'
     endif
 
-    let segment .= ' ' . hash . a:b . ':'
+    if bufwinnr(a:b)->getwinvar('&previewwindow', v:false)
+        let segment .= ' [p]'
+    else
+        let segment .= ' ' . hash . a:b . ':'
+    endif
+
     let segment .= ' ' . name . ' '
 
     if getbufvar(a:b, '&mod')
