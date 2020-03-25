@@ -107,6 +107,12 @@ command DiffOrig vert new | set bt=nofile | r ++edit # | 0d_ | diffthis
 command ClearQuickfixList cgetexpr ''
 command ClearLocationList lgetexpr ''
 
+" navigate the quickfix/location lists
+nnoremap <leader>qq :cnext<CR>
+nnoremap <leader>q<leader> :cprevious<CR>
+nnoremap <leader>ll :lnext<CR>
+nnoremap <leader>l<leader> :lprevious<CR>
+
 " }}}
 
 " filetype-specific settings {{{
