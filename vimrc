@@ -67,8 +67,21 @@ colorscheme lucius
 
 " custom commands {{{
 
+" function to wrap a command and preserve its search string and cursor position
+function! Preserve(command)
+    " Preparation: save last search, and cursor position.
+    let l:_s=@/
+    let l:l = line('.')
+    let l:c = col('.')
+    " Do the business:
+    execute a:command
+    " Clean up: restore previous search history, and cursor position
+    let @/=l:_s
+    call cursor(l:l, l:c)
+endfunction
+
 " command :TrimTrailing removes trailing whitespace in the file
-command TrimTrailing %s/\s\+$
+command TrimTrailing call Preserve("%s/\\s\\+$")
 
 " use <leader><space> to clear search and :match highlights
 nnoremap <silent> <leader><space> :nohlsearch<Bar>match none<CR>
