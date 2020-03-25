@@ -1,7 +1,7 @@
 " custom statusline
 
 set statusline=
-set statusline+=[\ %{mode('1')}\ ]                  " mode flag
+set statusline+=[\ %{MisdreavusModeFlag()}\ ]       " mode flag
 set statusline+=%#Folded#                           " color next section medium
 set statusline+=%(%{FugitiveStatusline()}%)         " git HEAD
 set statusline+=%#SignColumn#                       " color next section light
@@ -18,6 +18,43 @@ set statusline+=%{MisdreavusTrailingSpaceCheck()}   " trailing whitespace marker
 set statusline+=%{MisdreavusTabsSpacesCheck()}      " mixed indent (in same line) marker
 set statusline+=%{MisdreavusMixedIndentCheck()}     " mixed indent (across file) marker
 set statusline+=%*                                  " reset statusline color at the end
+
+" mode string for statusline
+function! MisdreavusModeFlag()
+    let mode_map = {
+          \ 'c'  : 'comm',
+          \ 'i'  : 'ins',
+          \ 'ic' : 'comp',
+          \ 'ix' : 'comp',
+          \ 'n'  : 'norm',
+          \ 'ni' : 'norm*',
+          \ 'no' : 'oper',
+          \ 'R'  : 'repl',
+          \ 'Rv' : 'v repl',
+          \ 's'  : 'sel',
+          \ 'S'  : 'sel-l',
+          \ '' : 'sel-b',
+          \ 't'  : 'term',
+          \ 'v'  : 'vis',
+          \ 'V'  : 'vis-l',
+          \ '' : 'vis-b',
+          \ }
+
+    let mode = mode('1')
+
+    if has_key(mode_map, mode)
+        return mode_map[mode]
+    endif
+
+    for k in keys(mode_map)
+        if match(mode, k) == 0
+            return mode_map[k]
+        endif
+    endfor
+
+    " for unknown modes just return the flag unaltered
+    return mode
+endfunction
 
 " location list index/count for statusline
 function! MisdreavusLocationCounter()
