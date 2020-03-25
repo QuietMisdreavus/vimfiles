@@ -6,13 +6,21 @@
 set showtabline=2
 
 function! MisdreavusIncludeInLeftTabs(b)
-    return bufexists(a:b) && buflisted(a:b)
+    return bufexists(a:b) && buflisted(a:b) && (getbufvar(a:b, '&filetype') != 'qf')
 endfunction
 
 function! MisdreavusIncludeInRightTabs(b)
-    " TODO: also include quickfix list, location list, preview window
-    let visbufs = tabpagebuflist()
-    return bufexists(a:b) && !buflisted(a:b) && (index(visbufs, a:b) != -1)
+    if !bufexists(a:b)
+        return v:false
+    endif
+
+    if buflisted(a:b)
+        " TODO: add preview window?
+        return getbufvar(a:b, '&filetype') == 'qf'
+    else
+        let visbufs = tabpagebuflist()
+        return index(visbufs, a:b) != -1
+    endif
 endfunction
 
 function! MisdreavusTabSegment(b)
@@ -38,8 +46,14 @@ function! MisdreavusTabSegment(b)
         " bar regardless. i don't want to print the full path tho, so just grab the filename
         let name = bufname(a:b)->fnamemodify(':t')
     elseif getbufvar(a:b, '&filetype') == 'qf'
-        " the quickfix list's name isn't in the bufname, but behind this `getqflist` api
-        let name = getqflist({'qfbufnr': a:b, 'title': 0}).title
+        if has_key(s:loclists, a:b)
+            " the location list also uses the 'qf' filetype, so check whether this window is a
+            " location list first
+            let name = s:loclists[a:b]
+        else
+            " the quickfix list's name isn't in the bufname, but behind this `getqflist` api
+            let name = getqflist({'qfbufnr': a:b, 'title': 0}).title
+        endif
     else
         let name = bufname(a:b)->pathshorten()
     endif
@@ -112,5 +126,27 @@ function! MisdreavusTabline()
 
     return s
 endfunction
+
+" keep a cache of the active location list buffers and their titles
+let s:loclists = {}
+
+function! s:refresh_loclists()
+    let loclists = {}
+    for win in range(1, winnr('$'))
+        let loc = getloclist(win, {'qfbufnr':0, 'title':0})
+        if loc.qfbufnr != 0 && !has_key(loclists, loc.qfbufnr)
+            let loclists[loc.qfbufnr] = loc.title
+        endif
+    endfor
+
+    let s:loclists = loclists
+endfunction
+
+" refresh the location list cache when buffers are changed
+augroup tabline
+    autocmd!
+    autocmd BufAdd * call <sid>refresh_loclists()
+    autocmd BufDelete * call <sid>refresh_loclists()
+augroup END
 
 set tabline=%!MisdreavusTabline()
