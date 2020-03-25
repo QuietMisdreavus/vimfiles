@@ -103,6 +103,10 @@ command DisableCursorRecall augroup loadFile | autocmd! | augroup END
 command DiffOrig vert new | set bt=nofile | r ++edit # | 0d_ | diffthis
         \ | wincmd p | diffthis
 
+" commands to clear out the quickfix/location lists
+command ClearQuickfixList cgetexpr ''
+command ClearLocationList lgetexpr ''
+
 " }}}
 
 " filetype-specific settings {{{
