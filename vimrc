@@ -151,6 +151,12 @@ augroup vimscript
     autocmd FileType vim setlocal foldmethod=marker
 augroup END
 
+augroup quickfix
+    autocmd!
+    " don't include quickfix/location lists in the buffer list
+    autocmd FileType qf setlocal nobuflisted
+augroup END
+
 " }}}
 
 " plugin-specfic settings {{{
