@@ -7,6 +7,8 @@ set statusline+=%(%{FugitiveStatusline()}%)         " git HEAD
 set statusline+=%#SignColumn#                       " color next section light
 set statusline+=\ #%n:\ %f                          " buf number: filename
 set statusline+=%=                                  " right-align remaining items
+set statusline+=%{MisdreavusLocationCounter()}      " location list: (index/count)
+set statusline+=%{MisdreavusQuickfixCounter()}      " quickfix list: (index/count)
 set statusline+=%#Folded#                           " color next section medium
 set statusline+=%h%w%m%y                            " flags: [help][preview][mod][filetype]
 set statusline+=%*                                  " color next section dark (normal)
@@ -16,6 +18,28 @@ set statusline+=%{MisdreavusTrailingSpaceCheck()}   " trailing whitespace marker
 set statusline+=%{MisdreavusTabsSpacesCheck()}      " mixed indent (in same line) marker
 set statusline+=%{MisdreavusMixedIndentCheck()}     " mixed indent (across file) marker
 set statusline+=%*                                  " reset statusline color at the end
+
+" location list index/count for statusline
+function! MisdreavusLocationCounter()
+    let loc = getloclist(winnr(), {'idx':0, 'size':0})
+
+    if loc.size == 0
+        return ''
+    else
+        return 'll: (' . loc.idx . '/' . loc.size . ') '
+    endif
+endfunction
+
+" quickfix list index/count for statusline
+function! MisdreavusQuickfixCounter()
+    let qf = getqflist({'idx':0, 'size':0})
+
+    if qf.size == 0
+        return ''
+    else
+        return 'qf: (' . qf.idx . '/' . qf.size . ') '
+    endif
+endfunction
 
 " trailing whitespace check for statusline
 function! MisdreavusTrailingSpaceCheck()
