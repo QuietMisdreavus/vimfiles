@@ -31,3 +31,6 @@
 [submodule "bundle/Zenburn"]
 	path = pack/color/start/Zenburn
 	url = https://github.com/jnurmine/Zenburn.git
+[submodule "pack/plugin/start/vim-commentary"]
+	path = pack/plugin/start/vim-commentary
+	url = https://github.com/tpope/vim-commentary
