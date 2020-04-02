@@ -14,6 +14,10 @@ function! MisdreavusIncludeInLeftTabs(b)
         return v:false
     endif
 
+    if a:b == bufnr() || a:b == bufnr('#')
+        return v:false
+    endif
+
     if getbufvar(a:b, '&filetype') == 'qf'
         return v:false
     endif
@@ -27,6 +31,10 @@ endfunction
 
 function! MisdreavusIncludeInRightTabs(b)
     if !bufexists(a:b)
+        return v:false
+    endif
+
+    if a:b == bufnr() || a:b == bufnr('#')
         return v:false
     endif
 
@@ -114,10 +122,18 @@ function! MisdreavusTabline()
 
     let s .= '%#TabLine#'
 
+    let s .= MisdreavusTabSegment(curbuf)
+
+    if altbuf != -1 && buflisted(altbuf) && altbuf != curbuf
+        let s .= '|'
+        let s .= MisdreavusTabSegment(altbuf)
+    endif
+
     for b in range(1, bufnr('$'))
         if MisdreavusIncludeInLeftTabs(b)
             if firstbuf
                 let firstbuf = v:false
+                let s .= '||%<'
             else
                 let s .= '|'
             endif
