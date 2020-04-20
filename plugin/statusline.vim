@@ -17,6 +17,7 @@ set statusline+=%#Error#                            " color next section red
 set statusline+=%{MisdreavusTrailingSpaceCheck()}   " trailing whitespace marker
 set statusline+=%{MisdreavusTabsSpacesCheck()}      " mixed indent (in same line) marker
 set statusline+=%{MisdreavusMixedIndentCheck()}     " mixed indent (across file) marker
+set statusline+=%{MisdreavusALEStatus()}
 set statusline+=%*                                  " reset statusline color at the end
 
 " mode string for statusline
@@ -123,6 +124,19 @@ function! MisdreavusMixedIndentCheck()
     endif
 
     return b:misdreavus_mixed_indent_mark
+endfunction
+
+" ALE error count for statusline
+function! MisdreavusALEStatus()
+    if exists(":ALELint")
+        let counts = ale#statusline#Count(bufnr())
+
+        if counts.error != 0
+            return '[e:' . counts.error . ']'
+        endif
+    endif
+
+    return ''
 endfunction
 
 " clear statusline marker caches when idle or on write

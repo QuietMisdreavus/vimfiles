@@ -34,3 +34,9 @@
 [submodule "pack/plugin/start/vim-commentary"]
 	path = pack/plugin/start/vim-commentary
 	url = https://github.com/tpope/vim-commentary
+[submodule "pack/plugin/start/ale"]
+	path = pack/plugin/start/ale
+	url = https://github.com/dense-analysis/ale.git
+[submodule "pack/syntax/start/haskell-vim"]
+	path = pack/syntax/start/haskell-vim
+	url = https://github.com/neovimhaskell/haskell-vim.git

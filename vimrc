@@ -192,6 +192,23 @@ let g:airline#extensions#tabline#tab_nr_type = 1
 " show a condensed filename in the tabline
 let g:airline#extensions#tabline#fnamemod = ':p:~:.'
 
+" ALE settings
+" configure linters per-language
+let g:ale_linters = {}
+" haskell has loads of available linters, but i only want to use 'hlint' and 'stack build'
+let g:ale_linters["haskell"] = ['hlint', 'stack-build']
+
+" don't run linters unless i write a file
+let g:ale_lint_on_text_changed = 'never'
+let g:ale_lint_on_insert_leave = 0
+
+" use [l and ]l to navigate between lint warnings
+nnoremap ]l <Plug>(ale_next_wrap)
+nnoremap [l <Plug>(ale_previous_wrap)
+
+" use \al to show the lint message under the cursor
+nnoremap <leader>al :ALEDetail<CR>
+
 " }}}
 
 " load per-machine settings {{{
