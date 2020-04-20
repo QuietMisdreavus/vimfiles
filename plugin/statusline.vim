@@ -5,7 +5,7 @@ set statusline+=[\ %{MisdreavusModeFlag()}\ ]       " mode flag
 set statusline+=%#Folded#                           " color next section medium
 set statusline+=%(%{FugitiveStatusline()}%)         " git HEAD
 set statusline+=%#SignColumn#                       " color next section light
-set statusline+=\ #%n:\ %f                          " buf number: filename
+set statusline+=\ #%n:\ %<%f                        " buf number: filename (truncated if too long)
 set statusline+=%=\                                 " right-align remaining items
 set statusline+=%{MisdreavusLocationCounter()}      " location list: (index/count)
 set statusline+=%{MisdreavusQuickfixCounter()}      " quickfix list: (index/count)
