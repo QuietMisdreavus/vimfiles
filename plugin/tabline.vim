@@ -46,7 +46,7 @@ function! MisdreavusIncludeInRightTabs(b)
     endif
 endfunction
 
-function! MisdreavusTabSegment(b)
+function! MisdreavusTabSegment(b, fill = '')
     let segment = ''
     let curbuf = bufnr()
     let altbuf = bufnr('#')
@@ -85,10 +85,12 @@ function! MisdreavusTabSegment(b)
         let name = '[no name]'
     endif
 
+    let segment .= ' ' . a:fill
+
     if bufwinnr(a:b)->getwinvar('&previewwindow', v:false)
-        let segment .= ' [p]'
+        let segment .= '[p]'
     else
-        let segment .= ' ' . hash . a:b . ':'
+        let segment .= hash . a:b . ':'
     endif
 
     let segment .= ' ' . name . ' '
@@ -133,12 +135,14 @@ function! MisdreavusTabline()
         if MisdreavusIncludeInLeftTabs(b)
             if firstbuf
                 let firstbuf = v:false
-                let s .= '||%<'
+                let s .= '||'
+                let fill = '%<'
             else
                 let s .= '|'
+                let fill = ''
             endif
 
-            let s .= MisdreavusTabSegment(b)
+            let s .= MisdreavusTabSegment(b, fill)
         endif
     endfor
 
