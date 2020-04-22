@@ -78,7 +78,7 @@ function! MisdreavusTabSegment(b, fill = '')
             let name = getqflist({'qfbufnr': a:b, 'title': 0}).title
         endif
     else
-        let name = bufname(a:b)->pathshorten()
+        let name = bufname(a:b)->fnamemodify(':~:.')->pathshorten()
     endif
 
     if name == ''
