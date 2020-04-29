@@ -18,13 +18,13 @@
 	url = https://github.com/jonathanfilip/vim-lucius.git
 [submodule "bundle/sunshine-sorbet"]
 	path = pack/color/start/sunshine-sorbet
-	url = git@github.com:QuietMisdreavus/sunshine-sorbet.git
+	url = ../sunshine-sorbet.git
 [submodule "bundle/detectindent"]
 	path = pack/plugin/start/detectindent
 	url = https://github.com/ciaranm/detectindent.git
 [submodule "bundle/Windows-PowerShell-Syntax-Plugin"]
 	path = pack/syntax/start/Windows-PowerShell-Syntax-Plugin
-	url = git@github.com:QuietMisdreavus/Windows-PowerShell-Syntax-Plugin.git
+	url = ../Windows-PowerShell-Syntax-Plugin.git
 [submodule "bundle/swift.vim"]
 	path = pack/syntax/start/swift.vim
 	url = https://github.com/keith/swift.vim.git
