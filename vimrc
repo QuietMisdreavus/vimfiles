@@ -197,17 +197,27 @@ let g:airline#extensions#tabline#fnamemod = ':p:~:.'
 let g:ale_linters = {}
 " haskell has loads of available linters, but i only want to use 'hlint' and 'stack build'
 let g:ale_linters["haskell"] = ['hlint', 'stack-build']
+" bash doesn't have a set of default linters (i think it wants ft=sh) so enable shellcheck there
+let g:ale_linters["bash"] = ['shellcheck']
+
+" configure available linters for non-standard filetypes
+let g:ale_linter_aliases = {}
+" as above, 'bash' isn't an expected filetype, so tell ALE to enable the 'sh' linters there
+let g:ale_linter_aliases["bash"] = ['sh']
+
+" when running `shellcheck`, don't show warnings about `source`ing external files
+let g:ale_sh_shellcheck_options = '--exclude=SC1090'
 
 " don't run linters unless i write a file
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_insert_leave = 0
 
 " use [l and ]l to navigate between lint warnings
-nnoremap ]l <Plug>(ale_next_wrap)
-nnoremap [l <Plug>(ale_previous_wrap)
+nmap ]l <Plug>(ale_next_wrap)
+nmap [l <Plug>(ale_previous_wrap)
 
 " use \al to show the lint message under the cursor
-nnoremap <leader>al :ALEDetail<CR>
+nmap <leader>al <Plug>(ale_detail)
 
 " }}}
 
