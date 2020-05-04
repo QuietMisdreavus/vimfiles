@@ -35,8 +35,9 @@ set laststatus=2      " always show status line
 set ttimeoutlen=500   " time out commands at 0.5sec, so the mode display is a little faster
 
 " show tab complete menu and tab-complete to the longest substring
+" pressing tab again will start to cycle through the list
 set wildmenu
-set wildmode=list:longest
+set wildmode=list:longest,full
 
 " show trailing spaces, tab characters, and NBSP characters in the editor, and also mark when lines
 " extend past the screen when 'nowrap' is set
