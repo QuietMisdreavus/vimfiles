@@ -80,7 +80,7 @@ function! MisdreavusTabSegment(b, fill = '')
     else
         let name = bufname(a:b)
         if name != ''
-            let name = bufname(a:b)->fnamemodify(':~:.')->pathshorten()
+            let name = fnamemodify(name, ':~:.')->pathshorten()
         endif
     endif
 
