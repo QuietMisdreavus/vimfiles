@@ -10,7 +10,7 @@ set statusline+=%=\                                 " right-align remaining item
 set statusline+=%{MisdreavusLocationCounter()}      " location list: (index/count)
 set statusline+=%{MisdreavusQuickfixCounter()}      " quickfix list: (index/count)
 set statusline+=%#Folded#                           " color next section medium
-set statusline+=%h%w%m%y                            " flags: [help][preview][mod][filetype]
+set statusline+=%{MisdreavusStatusFlags()}          " flags: [p][mod][filetype]
 set statusline+=%*                                  " color next section dark (normal)
 set statusline+=ln\ %l/%L\ cl\ %c\                  " line number, col number
 set statusline+=%#Error#                            " color next section red
@@ -77,6 +77,30 @@ function! MisdreavusQuickfixCounter()
     else
         return 'qf: (' . qf.idx . '/' . qf.size . ') '
     endif
+endfunction
+
+function! MisdreavusStatusFlags()
+    if &previewwindow
+        let pflag = '[p]'
+    else
+        let pflag = ''
+    endif
+
+    if !&modifiable
+        let mflag = '[-]'
+    elseif &modified
+        let mflag = '[+]'
+    else
+        let mflag = ''
+    endif
+
+    if &filetype != ''
+        let ftflag = '[' . &filetype . ']'
+    else
+        let ftflag = ''
+    endif
+
+    return pflag . mflag . ftflag
 endfunction
 
 " trailing whitespace check for statusline
