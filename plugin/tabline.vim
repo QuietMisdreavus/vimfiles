@@ -69,14 +69,7 @@ function! MisdreavusTabSegment(b, fill = '')
         " bar regardless. i don't want to print the full path tho, so just grab the filename
         let name = bufname(a:b)->fnamemodify(':t')
     elseif getbufvar(a:b, '&filetype') == 'qf'
-        if has_key(s:loclists, a:b)
-            " the location list also uses the 'qf' filetype, so check whether this window is a
-            " location list first
-            let name = s:loclists[a:b]
-        else
-            " the quickfix list's name isn't in the bufname, but behind this `getqflist` api
-            let name = getqflist({'qfbufnr': a:b, 'title': 0}).title
-        endif
+        let name = misdreavus#qfname(a:b)
     else
         let name = bufname(a:b)
         if name != ''
@@ -169,27 +162,5 @@ function! MisdreavusTabline()
 
     return s
 endfunction
-
-" keep a cache of the active location list buffers and their titles
-let s:loclists = {}
-
-function! s:refresh_loclists()
-    let loclists = {}
-    for win in range(1, winnr('$'))
-        let loc = getloclist(win, {'qfbufnr':0, 'title':0})
-        if loc.qfbufnr != 0 && !has_key(loclists, loc.qfbufnr)
-            let loclists[loc.qfbufnr] = loc.title
-        endif
-    endfor
-
-    let s:loclists = loclists
-endfunction
-
-" refresh the location list cache when buffers are changed
-augroup tabline
-    autocmd!
-    autocmd BufAdd * call <sid>refresh_loclists()
-    autocmd BufDelete * call <sid>refresh_loclists()
-augroup END
 
 set tabline=%!MisdreavusTabline()

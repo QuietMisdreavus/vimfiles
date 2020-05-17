@@ -1,24 +1,95 @@
 " custom statusline
 
-set statusline=
-set statusline+=[\ %{MisdreavusModeFlag()}\ ]       " mode flag
-set statusline+=%#Folded#                           " color next section medium
-set statusline+=%(%{FugitiveStatusline()}%)         " git HEAD
-set statusline+=%#SignColumn#                       " color next section light
-set statusline+=\ #%n:\ %<%f                        " buf number: filename (truncated if too long)
-set statusline+=%=\                                 " right-align remaining items
-set statusline+=%{MisdreavusLocationCounter()}      " location list: (index/count)
-set statusline+=%{MisdreavusQuickfixCounter()}      " quickfix list: (index/count)
-set statusline+=%#Folded#                           " color next section medium
-set statusline+=%{MisdreavusStatusFlags()}          " flags: [p][mod][filetype]
-set statusline+=%*                                  " color next section dark (normal)
-set statusline+=ln\ %l/%L\ cl\ %c\                  " line number, col number
-set statusline+=%#Error#                            " color next section red
-set statusline+=%{MisdreavusTrailingSpaceCheck()}   " trailing whitespace marker
-set statusline+=%{MisdreavusTabsSpacesCheck()}      " mixed indent (in same line) marker
-set statusline+=%{MisdreavusMixedIndentCheck()}     " mixed indent (across file) marker
-set statusline+=%{MisdreavusALEStatus()}
-set statusline+=%*                                  " reset statusline color at the end
+set statusline=%!MisdreavusStatusLine()
+
+if !exists('g:qf_disable_statusline')
+    " disable the built-in quickfix list plugin from overriding the statusline
+    let g:qf_disable_statusline = 1
+endif
+
+function! MisdreavusStatusLine()
+    let s = ''
+
+    let w = g:statusline_winid
+    let b = winbufnr(w)
+
+    let qftype = misdreavus#qftype(b)
+
+    " Section 1: mode
+
+    " mode flag
+    let s .= '[ %{MisdreavusModeFlag()} ]'
+
+    " Section 2: git status
+
+    " color this section medium
+    let s .= '%#Folded#'
+
+    " don't print git status for qf/ll windows
+    if qftype == ''
+        let s .= '%{FugitiveStatusline()}'
+    endif
+
+    " Section 3: main (buffer name, qf/ll count)
+
+    " color this section light
+    let s .= '%#SignColumn#'
+
+    if qftype == ''
+        " #N: filename (placing a folding marker before the filename to truncate if necessary)
+        let s .= ' #%n: %<%f'
+    else
+        " qf: command (placing a folding marker before the name)
+        let s .= ' ' . qftype . ': %<' . misdreavus#qfname(b)
+    endif
+
+    " right-align everything after this point
+    let s .= '%= '
+
+    if qftype == ''
+        " ll/qf counters, if the lists are loaded
+        let s .= '%{MisdreavusLocationCounter()}'
+        if g:statusline_winid == 1
+            " only show the quickfix counter on window 1
+            let s .= '%{MisdreavusQuickfixCounter()}'
+        endif
+    endif
+
+    " Section 4: flags
+
+    " color this section medium
+    let s .= '%#Folded#'
+
+    if qftype == ''
+        " only show flags for normal windows
+        let s .= '%{MisdreavusStatusFlags()}'
+    endif
+
+    " Section 5: cursor location
+
+    " color this section dark (normal)
+    let s .= '%*'
+
+    " ln num/count col num
+    let s .= 'ln %l/%L cl %c '
+
+    " Section 6: warning flags
+
+    " color this section red
+    let s .= '%#Error#'
+
+    if qftype == ''
+        let s .= '%{MisdreavusTrailingSpaceCheck()}' " trailing whitespace
+        let s .= '%{MisdreavusTabsSpacesCheck()}'    " mixed indent in same line
+        let s .= '%{MisdreavusMixedIndentCheck()}'   " mixed indent across file
+        let s .= '%{MisdreavusALEStatus()}'          " ALE warning/error counter
+    endif
+
+    " reset color at the end
+    let s .= '%*'
+
+    return s
+endfunction
 
 " mode string for statusline
 function! MisdreavusModeFlag()
