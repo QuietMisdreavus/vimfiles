@@ -26,7 +26,7 @@ function! MisdreavusStatusLine()
     let s .= '%#Folded#'
 
     " don't print git status for qf/ll windows
-    if qftype == ''
+    if qftype == '' && exists('*FugitiveStatusline')
         let s .= '%{FugitiveStatusline()}'
     endif
 
@@ -223,7 +223,7 @@ endfunction
 
 " ALE error count for statusline
 function! MisdreavusALEStatus()
-    if exists(":ALELint")
+    if exists("*ale#statusline#Count")
         let counts = ale#statusline#Count(bufnr())
 
         if counts.error != 0
