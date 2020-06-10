@@ -39,6 +39,9 @@ set ttimeoutlen=500   " time out commands at 0.5sec, so the mode display is a li
 set wildmenu
 set wildmode=list:longest,full
 
+" ignore case when tab-completing files
+set wildignorecase
+
 " show trailing spaces, tab characters, and NBSP characters in the editor, and also mark when lines
 " extend past the screen when 'nowrap' is set
 set list
