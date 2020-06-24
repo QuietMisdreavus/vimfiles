@@ -151,6 +151,12 @@ function! MisdreavusQuickfixCounter()
 endfunction
 
 function! MisdreavusStatusFlags()
+    if &paste
+        let pasteflag = '[paste]'
+    else
+        let pasteflag = ''
+    endif
+
     if &previewwindow
         let pflag = '[p]'
     else
@@ -171,7 +177,7 @@ function! MisdreavusStatusFlags()
         let ftflag = ''
     endif
 
-    return pflag . mflag . ftflag
+    return pasteflag . pflag . mflag . ftflag
 endfunction
 
 " trailing whitespace check for statusline
