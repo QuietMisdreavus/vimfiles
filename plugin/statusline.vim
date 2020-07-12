@@ -163,7 +163,7 @@ function! MisdreavusStatusFlags()
         let pflag = ''
     endif
 
-    if !&modifiable
+    if !&modifiable || &readonly
         let mflag = '[-]'
     elseif &modified
         let mflag = '[+]'
