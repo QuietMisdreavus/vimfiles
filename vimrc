@@ -223,6 +223,10 @@ nmap [l <Plug>(ale_previous_wrap)
 " use \al to show the lint message under the cursor
 nmap <leader>al <Plug>(ale_detail)
 
+" misdreavus-mru settings
+" map Ctrl+7 to rotate the MRU buffers
+nmap <C-_> <Plug>RotateMru
+
 " }}}
 
 " load per-machine settings {{{
