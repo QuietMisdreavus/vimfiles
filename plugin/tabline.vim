@@ -26,6 +26,11 @@ function! MisdreavusIncludeInLeftTabs(b)
         return v:false
     endif
 
+    if UseMisdreavusMRU()
+        let idx = index(g:misdreavus_mru[winnr()], a:b)
+        return idx < 0 || idx >= g:misdreavus_mru_rotate_count
+    endif
+
     return v:true
 endfunction
 
@@ -36,6 +41,12 @@ function! MisdreavusIncludeInRightTabs(b)
 
     if a:b == bufnr() || a:b == bufnr('#')
         return v:false
+    endif
+
+    if UseMisdreavusMRU()
+        if index(g:misdreavus_mru[winnr()], a:b) >= 0
+            return v:false
+        endif
     endif
 
     if buflisted(a:b)
