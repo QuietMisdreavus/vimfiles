@@ -102,6 +102,53 @@ function! MisdreavusTabSegment(b, fill = '')
     return segment
 endfunction
 
+function! MisdreavusDefaultLeadTabs()
+    let curbuf = bufnr()
+    let altbuf = bufnr('#')
+
+    let s = MisdreavusTabSegment(curbuf)
+
+    if altbuf != -1 && buflisted(altbuf) && altbuf != curbuf
+        let s .= '|'
+        let s .= MisdreavusTabSegment(altbuf)
+    endif
+
+    return s
+endfunction
+
+function! UseMisdreavusMRU()
+    if !exists('g:misdreavus_mru')
+        return v:false
+    elseif !exists('g:misdreavus_mru_rotate_count')
+        return v:false
+    else
+        return g:misdreavus_mru_rotate_count > 0
+    endif
+endfunction
+
+function! MisdreavusMRULeadTabs()
+    let bufcount = g:misdreavus_mru_rotate_count
+    let printed = 0
+    let first = v:true
+    let s = ''
+
+    for b in g:misdreavus_mru
+        if first
+            let first = v:false
+        else
+            let s .= '|'
+        endif
+        let s .= MisdreavusTabSegment(b)
+
+        let printed += 1
+        if printed >= bufcount
+            break
+        endif
+    endfor
+
+    return s
+endfunction
+
 function! MisdreavusTabline()
     let s = ''
     let suf = ''
@@ -120,11 +167,10 @@ function! MisdreavusTabline()
 
     let s .= '%#TabLine#'
 
-    let s .= MisdreavusTabSegment(curbuf)
-
-    if altbuf != -1 && buflisted(altbuf) && altbuf != curbuf
-        let s .= '|'
-        let s .= MisdreavusTabSegment(altbuf)
+    if UseMisdreavusMRU()
+        let s .= MisdreavusMRULeadTabs()
+    else
+        let s .= MisdreavusDefaultLeadTabs()
     endif
 
     for b in range(1, bufnr('$'))
