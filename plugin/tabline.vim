@@ -119,6 +119,10 @@ endfunction
 function! UseMisdreavusMRU()
     if !exists('g:misdreavus_mru')
         return v:false
+    elseif !has_key(g:misdreavus_mru, winnr())
+        return v:false
+    elseif len(g:misdreavus_mru[winnr()]) < 2
+        return v:false
     elseif !exists('g:misdreavus_mru_rotate_count')
         return v:false
     else
@@ -132,7 +136,7 @@ function! MisdreavusMRULeadTabs()
     let first = v:true
     let s = ''
 
-    for b in g:misdreavus_mru
+    for b in g:misdreavus_mru[winnr()]
         if first
             let first = v:false
         else
