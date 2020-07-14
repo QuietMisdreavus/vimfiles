@@ -40,3 +40,6 @@
 [submodule "pack/syntax/start/haskell-vim"]
 	path = pack/syntax/start/haskell-vim
 	url = https://github.com/neovimhaskell/haskell-vim.git
+[submodule "pack/misdreavus/start/misdreavus-mru"]
+	path = pack/misdreavus/start/misdreavus-mru
+	url = ../misdreavus-mru.git
