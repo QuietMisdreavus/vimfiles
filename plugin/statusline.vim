@@ -10,7 +10,7 @@ endif
 function! MisdreavusStatusLine()
     let s = ''
 
-    let w = g:statusline_winid
+    let [t, w] = win_id2tabwin(g:statusline_winid)
     let b = winbufnr(w)
 
     let qftype = misdreavus#qftype(b)
@@ -49,7 +49,7 @@ function! MisdreavusStatusLine()
     if qftype == ''
         " ll/qf counters, if the lists are loaded
         let s .= '%{MisdreavusLocationCounter()}'
-        if g:statusline_winid == 1
+        if w == 1
             " only show the quickfix counter on window 1
             let s .= '%{MisdreavusQuickfixCounter()}'
         endif
