@@ -43,3 +43,6 @@
 [submodule "pack/misdreavus/start/misdreavus-mru"]
 	path = pack/misdreavus/start/misdreavus-mru
 	url = ../misdreavus-mru.git
+[submodule "pack/misdreavus/start/ghostline"]
+	path = pack/misdreavus/start/ghostline
+	url = ../ghostline.git
