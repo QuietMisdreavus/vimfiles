@@ -130,6 +130,9 @@ nnoremap <leader>q<leader> :cprevious<CR>
 nnoremap <leader>ll :lnext<CR>
 nnoremap <leader>l<leader> :lprevious<CR>
 
+" grep for the word under the cursor and pop a window with the results
+nnoremap <silent> <leader>gg :silent grep! <C-R><C-W> \| copen<CR>
+
 " }}}
 
 " filetype-specific settings {{{
