@@ -132,6 +132,9 @@ nnoremap <leader>l<leader> :lprevious<CR>
 
 " grep for the word under the cursor and pop a window with the results
 nnoremap <silent> <leader>gg :silent grep! <C-R><C-W> \| copen<CR>
+" visual mode mapping for the same - :execute/shellescape() needs to be used here because special
+" characters confuse the command-line
+xnoremap <silent> <leader>gg y:<C-U>exe 'silent grep! ' . shellescape(@") \| copen<CR>
 
 " }}}
 
