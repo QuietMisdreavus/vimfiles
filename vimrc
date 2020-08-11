@@ -233,6 +233,13 @@ nmap <leader>al <Plug>(ale_detail)
 " map Ctrl+7 to rotate the MRU buffers
 nmap <C-_> <Plug>RotateMru
 
+" misdreavus-session settings
+" prompt for saving a session when closing
+let g:misdreavus_session_autosave = 'prompt'
+
+" use the lowercase 'session.vim' to save sessions with
+let g:misdreavus_session_default = 'session.vim'
+
 " }}}
 
 " load per-machine settings {{{
