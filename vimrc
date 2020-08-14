@@ -58,6 +58,15 @@ endif
 " don't save these settings in session files, so we can overwrite them with vimrc changes
 set sessionoptions-=options
 
+" ...but if a buffer as local overrides for an option, keep those
+set sessionoptions+=localoptions
+
+" also save global variables in session files, to let misdreavus-mru save lists in sessions
+set sessionoptions+=globals
+
+" keep the size of the window in a session file
+set sessionoptions+=resize
+
 " if mouse support is available, set it for normal and visual modes
 " (this will enable it for terminal vim and diable insert-mode mouse for gvim)
 if has('mouse')
@@ -261,6 +270,6 @@ command -nargs=0 Saveoff :mksession! session.vim | :qa
 
 " ...and load the 'session.vim' file if it's there
 if filereadable("session.vim") && filewritable("session.vim") && argc() == 0
-    source session.vim
+    autocmd VimEnter * ++once ++nested source session.vim
 endif
 " }}}
