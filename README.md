@@ -4,8 +4,8 @@ This originally started as an experiment to learn git, but as i used it in more 
 grew into a place to play around with vim script. I've tried to keep my configuration heavily
 commented so people (including "future me") could learn more about what each things does.
 
-Some of my configuration grew enough that i broke it out into separate scripts in the `plugin/`
-directory, so those should also be considered part of my config.
+Some of my configuration grew enough that i broke it into separate "plugins". These are all located
+in the `pack/misdreavus/start` directory, and should be considered part of my config.
 
 I've set up the plugins i use as submodules in various directories under the `pack` folder. This
 uses the Vim 8.x native package management to load them up. I was previously using [pathogen] to
