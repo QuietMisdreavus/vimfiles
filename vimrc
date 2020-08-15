@@ -249,6 +249,9 @@ let g:misdreavus_session_autosave = 'prompt'
 " use the lowercase 'session.vim' to save sessions with
 let g:misdreavus_session_default = 'session.vim'
 
+" automatically load the default session if available
+let g:misdreavus_session_autoload = 'yes'
+
 " }}}
 
 " load per-machine settings {{{
@@ -266,10 +269,5 @@ endif
 
 " super-janky session management {{{
 " use :Saveoff to dump current session to './session.vim' and quit
-command -nargs=0 Saveoff :mksession! session.vim | :qa
-
-" ...and load the 'session.vim' file if it's there
-if filereadable("session.vim") && filewritable("session.vim") && argc() == 0
-    autocmd VimEnter * ++once ++nested source session.vim
-endif
+command -nargs=0 Saveoff :SaveSession | :qa
 " }}}
