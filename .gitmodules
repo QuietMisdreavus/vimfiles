@@ -46,3 +46,6 @@
 [submodule "pack/misdreavus/start/ghostline"]
 	path = pack/misdreavus/start/ghostline
 	url = ../ghostline.git
+[submodule "pack/misdreavus/start/session"]
+	path = pack/misdreavus/start/session
+	url = ../misdreavus-session.git
