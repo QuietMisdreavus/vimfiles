@@ -266,8 +266,3 @@ if filereadable(s:home_dir . "/.vim/" . hostname() . ".vim") ||
     execute "runtime " . hostname() . ".vim"
 endif
 " }}}
-
-" super-janky session management {{{
-" use :Saveoff to dump current session to './session.vim' and quit
-command -nargs=0 Saveoff :SaveSession | :qa
-" }}}
