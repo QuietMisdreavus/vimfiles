@@ -145,6 +145,9 @@ nnoremap <silent> <leader>gg :silent grep! <C-R><C-W> \| copen<CR>
 " characters confuse the command-line
 xnoremap <silent> <leader>gg y:<C-U>exe 'silent grep! ' . shellescape(@") \| copen<CR>
 
+" use g<Ctrl-T> to go forward in the tag stack
+nnoremap g<C-T> :<C-U>exe ':' .. v:count1 .. 'tag'<CR>
+
 " }}}
 
 " filetype-specific settings {{{
