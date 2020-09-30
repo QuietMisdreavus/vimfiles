@@ -260,6 +260,24 @@ let g:misdreavus_session_default = 'session.vim'
 " automatically load the default session if available
 let g:misdreavus_session_autoload = 'yes'
 
+" ghostline settings
+" set tab fill color per color scheme
+function! SetTabFill(colors_name)
+    if a:colors_name == 'lucius'
+        let g:ghostline_tab_fill_color = 'Folded'
+    else
+        unlet! g:ghostline_tab_fill_color
+    endif
+endfunction
+
+augroup GhostlineVimrc
+    autocmd!
+    autocmd ColorSchemePre * call SetTabFill(expand('<amatch>'))
+augroup END
+
+" call SetTabFill manually since i already called :colo above
+call SetTabFill(g:colors_name)
+
 " }}}
 
 " load per-machine settings {{{
