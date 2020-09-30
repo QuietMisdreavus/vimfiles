@@ -282,9 +282,9 @@ call SetTabFill(g:colors_name)
 
 " load per-machine settings {{{
 " per-machine settings can go in a file named after its hostname
-let s:vimrc_dir = fnamemodify(expand('<sfile>'), ':p:h')
+let s:machine_file = fnamemodify(expand('<sfile>'), ':p:h') . '/' . hostname() . '.vim'
 
-if filereadable(s:vimrc_dir . '/' . hostname() . '.vim')
-    execute "runtime " . hostname() . ".vim"
+if filereadable(s:machine_file)
+    execute 'source ' . s:machine_file
 endif
 " }}}
