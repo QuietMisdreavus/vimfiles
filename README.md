@@ -24,6 +24,12 @@ bundles for syntax definitions, color schemes, and plugins that offer extra func
 
 [pathogen]: https://github.com/tpope/vim-pathogen
 
+One extra thing i've had in there for a while is a sort of "escape hatch" to allow for
+machine-specific configuration to be added as an extra script. Any file with the name
+`my_hostname.vim` (where `my_hostname` is whatever is returned by `:echo hostname()`) will be
+sourced at the end of the `vimrc` script. As of 2020-09-30, these files are not saved into the
+repository, so that i don't have to update the repo as machines start or stop being used.
+
 *Note to self:* To add a new plugin to a `pack/**/start` directory, don't use `git clone`, use `git
 submodule add` instead. That makes sure git properly sees the new folder as a submodule instead of a
 bunch of new files.
